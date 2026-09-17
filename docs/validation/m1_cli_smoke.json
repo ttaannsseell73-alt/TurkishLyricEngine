@@ -1,0 +1,35 @@
+{
+  "package": "turkish-lyric-engine==0.1.0",
+  "runtime": "installed_wheel",
+  "successful": true,
+  "cli_runs": [
+    {
+      "command": "python -m turkish_lyric_engine meter examples/lyric_7.txt --syllables 7 --durak 4+3",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m turkish_lyric_engine meter examples/lyric_11.txt --syllables 11 --durak 6+5",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m turkish_lyric_engine rhyme güller küller --annotations examples/morphology.json",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m turkish_lyric_engine rhyme yaralıyım hatalıyım --zeyrek",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m turkish_lyric_engine ingest examples/archive.jsonl --db <temporary_local_database>",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m turkish_lyric_engine stats --db <temporary_local_database>",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m turkish_lyric_engine similarity examples/lyric_11.txt --db <temporary_local_database>",
+      "exit_code": 0
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+[
+  {"word":"güller","base_surface":"gül","lemma":"gül","suffixes":[{"surface":"ler","function":"noun_plural"}],"evidence":"reviewed_test_fixture:noun_plural"},
+  {"word":"küller","base_surface":"kül","lemma":"kül","suffixes":[{"surface":"ler","function":"noun_plural"}],"evidence":"reviewed_test_fixture:noun_plural"},
+  {"word":"kızlar","base_surface":"kız","lemma":"kız","suffixes":[{"surface":"lar","function":"noun_plural"}],"evidence":"reviewed_test_fixture:noun_plural"},
+  {"word":"atlar","base_surface":"at","lemma":"at","suffixes":[{"surface":"lar","function":"noun_plural"}],"evidence":"reviewed_test_fixture:noun_plural"}
+]
