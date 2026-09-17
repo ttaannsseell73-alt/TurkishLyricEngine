@@ -1,0 +1,29 @@
+{
+  "hash_method": "sha256",
+  "scope": "runtime_source_tests_examples_runner_and_dependency_spec",
+  "files": {
+    "examples/archive.jsonl": "28afc03607a202d43058fbd96e21522e030eb1a9af3bc4c0f19fcecc6b87fe5c",
+    "examples/lyric_11.txt": "cbbfae33f2fcc2c810e1d41cbdb4353147bb03f03b8f920a92bbf9e05008c309",
+    "examples/lyric_7.txt": "0e75a7b6fbbe12370960a02255d8779c40e6c22b0eddd181ba5341b7c8decafa",
+    "examples/morphology.json": "541336e6b762fac2dd52308c0bddc802cfb35018382bb230d3e1d864b004a440",
+    "pyproject.toml": "f8a2094335e42f160c3ec9c75e786aa89af20f0c4441ad51186e2f9b21ffcf65",
+    "requirements-morphology.lock.txt": "121b7bbe93448621bbaa82773dfa0dc207abb2aee4c858229757abfb69f40114",
+    "scripts/run_checks.py": "ba0d93d6a05265b0e4773d5e474938fa71be6070f3981e50e6e53e708e843f4e",
+    "src/turkish_lyric_engine/__init__.py": "6ccb372f27e4453c7318bead33c10c59a72f492ef5fa1cf3ce3627891159fb74",
+    "src/turkish_lyric_engine/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/turkish_lyric_engine/cli.py": "5a02d0ccdc8ea2bc74ad42272ff5a8ba10b9852695080e12e59403cf05af6ff5",
+    "src/turkish_lyric_engine/corpus.py": "17fbcf200d62fcc5ee7b7437e8963f20272ec83a1f8a6f2a047814e726d3c34c",
+    "src/turkish_lyric_engine/meter.py": "b3432d9e503aa751ba580f2a930d280af88a589dc4308165e7dc0a509a036c54",
+    "src/turkish_lyric_engine/morphology.py": "9a92a2b977298890a7644c464beb554170845676ec650c7229d16e84b772d800",
+    "src/turkish_lyric_engine/prosody.py": "945d0fb3d52b32cdec8f9ee8401ddeaa64356c17cc6b6309973ff6aef1320988",
+    "src/turkish_lyric_engine/rhyme.py": "4e9cacb4d1da3e6588c193f08e59073b0cf9a764407665139e233e4fae7097c1",
+    "src/turkish_lyric_engine/similarity.py": "37ef07cc2f54d2a1f4d39e9314d27072ac271cdd84b171efa7923fbe4941d845",
+    "src/turkish_lyric_engine/text.py": "a6fbad87c58dd29a58e88cd1180f86c5b96e066e8faf3a6c262fd9974e24c512",
+    "tests/test_cli.py": "e94cffe821c7783bbd686b148722e1ff266d31e6dc4e1d8d27b279eb9cb4b883",
+    "tests/test_corpus_similarity.py": "805fe4892feca9aa93ac290d236e171fb0bc0aa3f46c2ba9cf3bbb62b46182a4",
+    "tests/test_meter.py": "4cc26538a8f7a881010b65841f7a72ed82fa08958476ba6f656ad1815b0b26ed",
+    "tests/test_rhyme.py": "1e6bf07813a3ff471aeffa5af61ee77da0c0be1055367c6ff9a0a62f59a49514",
+    "tests/test_text_prosody.py": "93d3bd3afb5533add25f9dad586f3a9c901045a5fd44af36c1c3b6f4f9bcb0cb",
+    "tests/test_zeyrek_integration.py": "89c8fea1b02cfcfd5f4a060dd5ebf8a9a030971217b9e63bea63f309b633f516"
+  }
+}
