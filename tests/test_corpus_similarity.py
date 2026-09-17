@@ -1,4 +1,5 @@
 from dataclasses import replace
+from contextlib import closing
 from pathlib import Path
 import sqlite3
 import tempfile
@@ -96,13 +97,13 @@ class CorpusTests(unittest.TestCase):
         self.assertFalse(self.path.exists())
 
     def test_unknown_schema_rejected(self):
-        with sqlite3.connect(self.path) as db:
+        with closing(sqlite3.connect(self.path)) as db:
             db.execute("PRAGMA user_version = 999")
         with self.assertRaisesRegex(ValueError, "schema version"):
             CorpusStore(self.path)
 
     def test_foreign_database_not_repurposed(self):
-        with sqlite3.connect(self.path) as db:
+        with closing(sqlite3.connect(self.path)) as db:
             db.execute("CREATE TABLE personal_notes (text TEXT)")
         with self.assertRaisesRegex(ValueError, "foreign database"):
             CorpusStore(self.path)

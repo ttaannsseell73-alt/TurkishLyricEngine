@@ -20,7 +20,7 @@
     "src/turkish_lyric_engine/similarity.py": "37ef07cc2f54d2a1f4d39e9314d27072ac271cdd84b171efa7923fbe4941d845",
     "src/turkish_lyric_engine/text.py": "a6fbad87c58dd29a58e88cd1180f86c5b96e066e8faf3a6c262fd9974e24c512",
     "tests/test_cli.py": "e94cffe821c7783bbd686b148722e1ff266d31e6dc4e1d8d27b279eb9cb4b883",
-    "tests/test_corpus_similarity.py": "805fe4892feca9aa93ac290d236e171fb0bc0aa3f46c2ba9cf3bbb62b46182a4",
+    "tests/test_corpus_similarity.py": "9affc92b32fda09dd4f5d95202c9c426b8a61f7616f807f4201271770a44e262",
     "tests/test_meter.py": "4cc26538a8f7a881010b65841f7a72ed82fa08958476ba6f656ad1815b0b26ed",
     "tests/test_rhyme.py": "1e6bf07813a3ff471aeffa5af61ee77da0c0be1055367c6ff9a0a62f59a49514",
     "tests/test_text_prosody.py": "93d3bd3afb5533add25f9dad586f3a9c901045a5fd44af36c1c3b6f4f9bcb0cb",

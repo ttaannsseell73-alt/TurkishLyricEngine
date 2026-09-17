@@ -68,3 +68,8 @@ semantic critic; kullanıcı GOLD/RED öğrenmesi; embedding/block retrieval ve
 Bu belge yerel koşuları raporlar. GitHub CI sonucu bu belgenin yazıldığı anda
 henüz alınmadı; PR/checkpoint ve CI sonucu mevcut tek `PROJECT_STATE.md`
 dosyasında kaydedilecektir. `main` entegrasyonu bu raporla gerçekleşmiş sayılmaz.
+
+İlk GitHub CI turunda Linux core/gerçek morfoloji kontrolleri geçti. Windows'ta
+iki fixture SQLite bağlantısının transaction context'inin kapanınca bağlantıyı
+kapatmadığı görüldü; test hazırlığındaki bağlantılar `contextlib.closing` ile
+kesin kapatılıyor. Bu düzeltmenin Windows kabulü sonraki PR CI turunda izlenir.
