@@ -1,0 +1,51 @@
+{
+  "successful": true,
+  "checks": [
+    {
+      "command": "meter7",
+      "exit_code": 0
+    },
+    {
+      "command": "meter11",
+      "exit_code": 0
+    },
+    {
+      "command": "annotated_rhyme",
+      "exit_code": 0
+    },
+    {
+      "command": "redif",
+      "exit_code": 0
+    },
+    {
+      "command": "dictionary",
+      "exit_code": 0
+    },
+    {
+      "command": "ingest",
+      "exit_code": 0
+    },
+    {
+      "command": "stats",
+      "exit_code": 0
+    },
+    {
+      "command": "search",
+      "exit_code": 0
+    },
+    {
+      "command": "similarity",
+      "exit_code": 0
+    },
+    {
+      "command": "explicit_fixture_replay",
+      "exit_code": 0
+    },
+    {
+      "command": "audit",
+      "exit_code": 0
+    }
+  ],
+  "live_model_validation": false,
+  "fixture_is_gold": false
+}

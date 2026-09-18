@@ -1,0 +1,337 @@
+[
+  {
+    "stage": "concepts",
+    "response": {
+      "concepts": [
+        {
+          "id": "c01",
+          "angle": "Gitmesini isteyen kişiyi ikna etmek yerine kendi gününü kurmak.",
+          "conflict": "Yakın kalma isteği ile kendi hayatına dönme ihtiyacı.",
+          "turn": "Karşı tarafın kararını beklemekten vazgeçip harekete geçer.",
+          "mechanism_id": "attachment_boundary"
+        },
+        {
+          "id": "c02",
+          "angle": "İyi olduğunu söyleyen kişinin eski alışkanlığını fark etmesi.",
+          "conflict": "İyi olma iddiası ile birini kontrol etme alışkanlığı.",
+          "turn": "Alışkanlığını görünce kendine dürüst davranır.",
+          "mechanism_id": "claim_contradiction"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "idea_judge",
+    "response": {
+      "rankings": [
+        {
+          "id": "c01",
+          "score": 94,
+          "reason": "Somut davranıştan çıkan karar."
+        },
+        {
+          "id": "c02",
+          "score": 90,
+          "reason": "İddia ile alışkanlık karşıtlığı."
+        }
+      ]
+    }
+  },
+  {
+    "stage": "hooks",
+    "response": {
+      "hooks": [
+        {
+          "id": "h01",
+          "concept_id": "c01",
+          "text": "Sen kal diye ben durmam"
+        },
+        {
+          "id": "h02",
+          "concept_id": "c01",
+          "text": "Ben artık sana göre yaşamam"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "hook_judge",
+    "response": {
+      "rankings": [
+        {
+          "id": "h01",
+          "score": 93,
+          "reason": "Kısa karar ve tekrar."
+        },
+        {
+          "id": "h02",
+          "score": 89,
+          "reason": "Özerklik kararı."
+        }
+      ]
+    }
+  },
+  {
+    "stage": "story",
+    "response": {
+      "concept_id": "c01",
+      "hook_id": "h01",
+      "arc": "Beklemeyi fark etme, karar alma, kendi gününe dönme.",
+      "beats": [
+        {
+          "section_id": "verse1",
+          "purpose": "Eski bekleme alışkanlığını gösterir.",
+          "change": "Anlatıcı gününü karşı taraf için ertelediğini fark eder."
+        },
+        {
+          "section_id": "prechorus",
+          "purpose": "İki dürtü çarpışır.",
+          "change": "Beklemek yerine küçük bir karar alır."
+        },
+        {
+          "section_id": "verse2",
+          "purpose": "Kararın ilk sonucunu yaşar.",
+          "change": "Gününü geri alır; sevgi sürse de davranışı değişir."
+        },
+        {
+          "section_id": "prechorus2",
+          "purpose": "Kararın bedelini kabul eder.",
+          "change": "Kolay olmadığını görür ama geri dönmez."
+        },
+        {
+          "section_id": "bridge",
+          "purpose": "İç hesaplaşmayı tamamlar.",
+          "change": "Giden kişiyi cezalandırmadan kendi yolunu seçer."
+        }
+      ]
+    }
+  },
+  {
+    "stage": "draft",
+    "response": {
+      "concept_id": "c01",
+      "hook_id": "h01",
+      "story_hash": "fe98bea5a0973da25de84eec30105fe665a5209843c384f6c3b00555b83a68cf",
+      "title": "Kendi Günüm",
+      "sections": [
+        {
+          "id": "verse1",
+          "lines": [
+            "Bugün yine seni bekledim",
+            "Erteledim bütün işlerimi",
+            "Bir haberin gelmez diye",
+            "Saatleri sana verdim"
+          ]
+        },
+        {
+          "id": "prechorus",
+          "lines": [
+            "Ben kendime geç kalmışım",
+            "Şimdi karar bende kalsın"
+          ]
+        },
+        {
+          "id": "chorus",
+          "lines": [
+            "Sen kal diye ben durmam",
+            "Sevmek geri dönmek değil",
+            "Kendim için bir adım var",
+            "Benim yolum bana çıkar"
+          ]
+        },
+        {
+          "id": "verse2",
+          "lines": [
+            "İlk vapura yalnız bindim",
+            "Aceleyle kitap aldım",
+            "Bir sayfayı bitirince",
+            "Düşüncemi geri aldım"
+          ]
+        },
+        {
+          "id": "prechorus2",
+          "lines": [
+            "Kolay değil bunu bilmek",
+            "Yine de var dönmek için"
+          ]
+        },
+        {
+          "id": "chorus2",
+          "lines": [
+            "Sen kal diye ben durmam",
+            "Sevmek geri dönmek değil",
+            "Kendim için bir adım var",
+            "Benim yolum bana çıkar"
+          ]
+        },
+        {
+          "id": "bridge",
+          "lines": [
+            "Sana kızgın olmam gerekmez",
+            "Kendi günüm bana yeter"
+          ]
+        },
+        {
+          "id": "final_chorus",
+          "lines": [
+            "Sen kal diye ben durmam",
+            "Sevmek geri dönmek değil",
+            "Kendim için bir adım var",
+            "Benim yolum bana çıkar"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "critic",
+    "response": {
+      "dimensions": {
+        "idea_adherence": 94,
+        "natural_turkish": 60,
+        "emotional_progression": 94,
+        "hook_strength": 94,
+        "register_consistency": 94,
+        "originality": 94,
+        "singability_text": 94
+      },
+      "rationale": "Technical replay fixture judgement; not a human quality label.",
+      "issues": [
+        {
+          "section_id": "verse1",
+          "line": 1,
+          "reason": "Regression fixture: first line is chosen for a forced revision.",
+          "suggestion": "Bekleme alışkanlığının fark edildiği anı açıklaştır."
+        }
+      ]
+    }
+  },
+  {
+    "stage": "draft",
+    "response": {
+      "concept_id": "c01",
+      "hook_id": "h01",
+      "story_hash": "fe98bea5a0973da25de84eec30105fe665a5209843c384f6c3b00555b83a68cf",
+      "title": "Kendi Günüm",
+      "sections": [
+        {
+          "id": "verse1",
+          "lines": [
+            "Bugün yine seni bekledim",
+            "Erteledim bütün işlerimi",
+            "Bir haberin gelmez diye",
+            "Saatleri sana verdim"
+          ]
+        },
+        {
+          "id": "prechorus",
+          "lines": [
+            "Ben kendime geç kalmışım",
+            "Şimdi karar bende kalsın"
+          ]
+        },
+        {
+          "id": "chorus",
+          "lines": [
+            "Sen kal diye ben durmam",
+            "Sevmek geri dönmek değil",
+            "Kendim için bir adım var",
+            "Benim yolum bana çıkar"
+          ]
+        },
+        {
+          "id": "verse2",
+          "lines": [
+            "İlk vapura yalnız bindim",
+            "Aceleyle kitap aldım",
+            "Bir sayfayı bitirince",
+            "Düşüncemi geri aldım"
+          ]
+        },
+        {
+          "id": "prechorus2",
+          "lines": [
+            "Kolay değil bunu bilmek",
+            "Yine de var dönmek için"
+          ]
+        },
+        {
+          "id": "chorus2",
+          "lines": [
+            "Sen kal diye ben durmam",
+            "Sevmek geri dönmek değil",
+            "Kendim için bir adım var",
+            "Benim yolum bana çıkar"
+          ]
+        },
+        {
+          "id": "bridge",
+          "lines": [
+            "Sana kızgın olmam gerekmez",
+            "Kendi günüm bana yeter"
+          ]
+        },
+        {
+          "id": "final_chorus",
+          "lines": [
+            "Sen kal diye ben durmam",
+            "Sevmek geri dönmek değil",
+            "Kendim için bir adım var",
+            "Benim yolum bana çıkar"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "stage": "critic",
+    "response": {
+      "dimensions": {
+        "idea_adherence": 94,
+        "natural_turkish": 55,
+        "emotional_progression": 94,
+        "hook_strength": 94,
+        "register_consistency": 94,
+        "originality": 94,
+        "singability_text": 94
+      },
+      "rationale": "Technical replay fixture judgement; not a human quality label.",
+      "issues": [
+        {
+          "section_id": "verse1",
+          "line": 1,
+          "reason": "Regression fixture: first line is chosen for a forced revision.",
+          "suggestion": "Bekleme alışkanlığının fark edildiği anı açıklaştır."
+        }
+      ]
+    }
+  },
+  {
+    "stage": "revision",
+    "response": {
+      "patches": [
+        {
+          "section_id": "verse1",
+          "line": 1,
+          "text": "Bugün yine kendimi unuttum"
+        }
+      ]
+    }
+  },
+  {
+    "stage": "critic",
+    "response": {
+      "dimensions": {
+        "idea_adherence": 94,
+        "natural_turkish": 94,
+        "emotional_progression": 94,
+        "hook_strength": 94,
+        "register_consistency": 94,
+        "originality": 94,
+        "singability_text": 94
+      },
+      "rationale": "Technical replay fixture judgement; not a human quality label.",
+      "issues": []
+    }
+  }
+]

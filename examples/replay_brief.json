@@ -1,0 +1,29 @@
+{
+  "theme": "Birini sevse de kendi yoluna dönmek.",
+  "genre": "Türkçe pop ballad",
+  "mood": "dokunaklı, doğal, güçlü",
+  "meter": null,
+  "durak": null,
+  "rhyme_scheme": "free",
+  "max_chars": 5000,
+  "concept_count": 2,
+  "hook_count": 2,
+  "writer_count": 2,
+  "max_rounds": 2,
+  "target_score": 80,
+  "max_calls": 40,
+  "avoid": [
+    "gece",
+    "duvar",
+    "sokak",
+    "perde",
+    "sigara",
+    "tavan",
+    "boş oda",
+    "nefes",
+    "kalp",
+    "gözyaşı",
+    "kader",
+    "aşk acısı"
+  ]
+}

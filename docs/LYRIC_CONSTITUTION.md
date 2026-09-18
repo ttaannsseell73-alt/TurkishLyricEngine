@@ -2,7 +2,8 @@
 
 Kaynak: kullanıcının bu başlangıç mesajındaki kilitli kararları ve görünen
 önceki söz çalışmaları. Eski raporun referans kimlikleri doğrulanmış kaynak
-sayılmadı. Bu belge ürün sözleşmesidir; maddelerin hepsi uygulanmış değildir.
+sayılmadı. Bu belge metin V1 kalite sözleşmesidir; canlı/insan kabulü teknik
+testten ayrıdır. Melodik vurgu/sustain metin analizinden doğrulanmaz.
 
 1. Anlam, duygusal çatışma ve doğal Türkçe temel önceliktir.
 2. Kafiye anlamı bozmak için kullanılmaz. Yalnız aynı ek yeterli kafiye değildir.
@@ -16,7 +17,8 @@ sayılmadı. Bu belge ürün sözleşmesidir; maddelerin hepsi uygulanmış değ
    4–7 kelime başlangıç tercihi, mutlak tüm-türler yasası değildir.
 7. Writer kısa brief alır. Teknik/kalite denetimleri writer dışındadır.
 8. Genel AI hüznü, terapi dili, yapay Türkçe ve anlamsız kafiye eleştirilecektir;
-   bunların tamamı V1'de tespit edilmiş gibi raporlanmaz.
+   phrase/corpus kanıtı ve semantic critic ile denetlenir; kusursuz tespit
+   veya kalibre edilmiş insan değerlendirmesi olarak sunulmaz.
 9. Kurgu mekanizmalarında orijinal örnek, neden vurduğu ve kelimeden bağımsız
    mekanizma ayrı tutulur. Tek iyi örnek evrensel üretim formülüne çevrilmez.
 10. Concept, Hook ve Story kilitleri hedefli rewrite sırasında korunur.
@@ -34,6 +36,8 @@ sayılmadı. Bu belge ürün sözleşmesidir; maddelerin hepsi uygulanmış değ
 15. Son ürün insan sesinde ve gerçek dinleyicide değerlendirilir. Doğru soru:
     Bu satır doğal biçimde söyleniyor mu, bütün şarkının duygusuna hizmet ediyor mu?
 
-M1'de uygulanan: Unicode/korpus bütünlüğü, seçilebilir hece ölçüsü/durak,
-kanıtlı redif ayrımı, belirsizlik raporu ve temel sözcüksel benzerlik.
-Concept/Hook/Story, writer ve anlamsal critic henüz uygulanmadı.
+Uygulanan: Unicode/corpus, seçilebilir ölçü/durak, kanıtlı redif/fonetik kafiye,
+articulation yükü, belirsizlik; Concept/Hook/Story kilitleri, çoklu writer,
+semantic critic, quality gate ve bounded rewrite; gerçek feedback sayacı.
+Canlı model erişimi yokken generation kalite kabulü yapılmaz. Teknik fixture
+ve transport testleri gerçek lyrics başarısına eşit değildir.

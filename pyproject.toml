@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "turkish-lyric-engine"
-version = "0.1.0"
-description = "Auditable Turkish lyric corpus, syllable and rhyme foundation"
+version = "1.0.0"
+description = "Turkish lyric intelligence, corpus, morphology, meter and revision engine"
 requires-python = ">=3.11"
 dependencies = []
 

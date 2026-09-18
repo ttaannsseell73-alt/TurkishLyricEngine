@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 import tempfile
 import unittest
 
@@ -11,6 +12,15 @@ def noun(word, base, suffix="ler", function="noun_plural"):
 
 
 class RhymeTests(unittest.TestCase):
+    def test_reviewed_redif_rhyme_regression_fixture(self):
+        fixtures = json.loads((Path(__file__).parent / 'fixtures' / 'redif_rhyme_regressions.json').read_text(encoding='utf-8'))
+        for fixture in fixtures:
+            entries = [MorphAnalysis(row['word'],row['base_surface'],row['lemma'],tuple(Segment(**s) for s in row['suffixes']),row['evidence']) for row in fixture['analyses']]
+            with self.subTest(left=fixture['left'],right=fixture['right']):
+                report = analyze_pair(fixture['left'],fixture['right'],AnnotationMorphology(entries))
+                for name,value in fixture['expected'].items():
+                    self.assertEqual(report[name],value)
+
     def test_redif_separated_from_true_base_tail(self):
         provider = AnnotationMorphology([noun("güller", "gül"), noun("küller", "kül")])
         report = analyze_pair("Kalan güller", "Solan küller", provider)

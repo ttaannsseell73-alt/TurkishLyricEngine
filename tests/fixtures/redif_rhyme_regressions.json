@@ -1,0 +1,158 @@
+[
+  {
+    "left": "yollarım",
+    "right": "kollarım",
+    "analyses": [
+      {
+        "word": "yollarım",
+        "base_surface": "yol",
+        "lemma": "yol",
+        "suffixes": [
+          {
+            "surface": "lar",
+            "function": "plural"
+          },
+          {
+            "surface": "ım",
+            "function": "possessive_1sg"
+          }
+        ],
+        "evidence": "reviewed_technical_regression"
+      },
+      {
+        "word": "kollarım",
+        "base_surface": "kol",
+        "lemma": "kol",
+        "suffixes": [
+          {
+            "surface": "lar",
+            "function": "plural"
+          },
+          {
+            "surface": "ım",
+            "function": "possessive_1sg"
+          }
+        ],
+        "evidence": "reviewed_technical_regression"
+      }
+    ],
+    "expected": {
+      "suffix_redif": "larım",
+      "base_tail": "ol",
+      "rhyme_class_candidate": "tam"
+    }
+  },
+  {
+    "left": "yaralıyım",
+    "right": "hatalıyım",
+    "analyses": [
+      {
+        "word": "yaralıyım",
+        "base_surface": "yara",
+        "lemma": "yara",
+        "suffixes": [
+          {
+            "surface": "lı",
+            "function": "adjectivizer"
+          },
+          {
+            "surface": "yım",
+            "function": "copula_1sg"
+          }
+        ],
+        "evidence": "reviewed_technical_regression"
+      },
+      {
+        "word": "hatalıyım",
+        "base_surface": "hata",
+        "lemma": "hata",
+        "suffixes": [
+          {
+            "surface": "lı",
+            "function": "adjectivizer"
+          },
+          {
+            "surface": "yım",
+            "function": "copula_1sg"
+          }
+        ],
+        "evidence": "reviewed_technical_regression"
+      }
+    ],
+    "expected": {
+      "suffix_redif": "lıyım",
+      "base_tail": "a",
+      "rhyme_class_candidate": "yarım"
+    }
+  },
+  {
+    "left": "güller",
+    "right": "küller",
+    "analyses": [
+      {
+        "word": "güller",
+        "base_surface": "gül",
+        "lemma": "gül",
+        "suffixes": [
+          {
+            "surface": "ler",
+            "function": "plural"
+          }
+        ],
+        "evidence": "reviewed_technical_regression"
+      },
+      {
+        "word": "küller",
+        "base_surface": "kül",
+        "lemma": "kül",
+        "suffixes": [
+          {
+            "surface": "ler",
+            "function": "plural"
+          }
+        ],
+        "evidence": "reviewed_technical_regression"
+      }
+    ],
+    "expected": {
+      "suffix_redif": "ler",
+      "base_tail": "ül",
+      "rhyme_class_candidate": "tam"
+    }
+  },
+  {
+    "left": "kızlar",
+    "right": "atlar",
+    "analyses": [
+      {
+        "word": "kızlar",
+        "base_surface": "kız",
+        "lemma": "kız",
+        "suffixes": [
+          {
+            "surface": "lar",
+            "function": "plural"
+          }
+        ],
+        "evidence": "reviewed_technical_regression"
+      },
+      {
+        "word": "atlar",
+        "base_surface": "at",
+        "lemma": "at",
+        "suffixes": [
+          {
+            "surface": "lar",
+            "function": "plural"
+          }
+        ],
+        "evidence": "reviewed_technical_regression"
+      }
+    ],
+    "expected": {
+      "suffix_redif": "lar",
+      "base_tail": "",
+      "rhyme_class_candidate": null
+    }
+  }
+]
