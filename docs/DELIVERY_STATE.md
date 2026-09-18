@@ -8,9 +8,9 @@ CLI ve local API eklendi. Bu dosya ikinci bir görev izleyicisi değildir.
 
 ## Kanıt ayrımı
 
-2026-09-18 yerel doğrulama: full suite **134 PASS / 0 FAIL / 0 ERROR / 0 SKIP**;
-129 core bunun alt kümesidir, ayrıca toplanmaz. Full suite gerçek Zeyrek0.1.3 /
-NLTK3.10.3 ile çalıştırıldı. Dependency'siz core129 PASS. Kurulu V1 wheel ile
+2026-09-18 yerel doğrulama: full suite **135 PASS / 0 FAIL / 0 ERROR / 0 SKIP**;
+130 core bunun alt kümesidir, ayrıca toplanmaz. Full suite gerçek Zeyrek0.1.3 /
+NLTK3.10.3 ile çalıştırıldı. Dependency'siz core130 PASS. Kurulu V1 wheel ile
 11 CLI senaryosu PASS; JSON/lyrics/journal dosyaları da denetlendi. Credential
 bulunmadığı için live model validation=false. CI sonucu bu yerel sayılar değildir.
 

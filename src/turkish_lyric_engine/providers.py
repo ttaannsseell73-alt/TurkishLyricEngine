@@ -75,6 +75,8 @@ class HttpJsonProvider:
             if len(data) > 2_000_000:
                 raise ProviderError("model response exceeds size limit")
             envelope = json.loads(data)
+            if not isinstance(envelope, dict):
+                raise ProviderError("model transport envelope must be a JSON object")
         except HTTPError as exc:
             # Provider error bodies can echo private prompt/API data. Never log them.
             exc.close()

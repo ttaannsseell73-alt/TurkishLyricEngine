@@ -90,6 +90,12 @@ class ProviderTests(unittest.TestCase):
                 with self.assertRaises(ProviderError):
                     HttpJsonProvider('model',kind='ollama',base_url=url).complete('unit','system',{},self.schema)
 
+    def test_non_object_transport_envelopes_are_clean_provider_errors(self):
+        for value in ([],None,'invalid-envelope'):
+            with self.subTest(value=value), server(transport_handler(value)) as url:
+                with self.assertRaises(ProviderError):
+                    HttpJsonProvider('model',kind='ollama',base_url=url).complete('unit','system',{},self.schema)
+
     def test_transport_failure_does_not_echo_body_or_key(self):
         capture=[]
         with server(transport_handler({'private':'transport-test-key'},code=429,capture=capture)) as url:
