@@ -6,6 +6,7 @@ from dataclasses import asdict, dataclass
 import re
 
 from .text import LETTERS, VOWELS, lyric_lines, words
+from .phonology import articulation
 
 
 @dataclass(frozen=True)
@@ -42,9 +43,17 @@ def analyze_line(line: str, policy: ProsodyPolicy | None = None) -> dict:
         if token.replace("'", "") in {"bi", "gelcem", "gidicem", "napıcam", "nolur"}:
             issues.append("colloquial_surface_pronunciation")
         warnings.extend(issues)
-        token_reports.append({"word": token, "orthographic_syllables": count, "warnings": issues})
+        vocal = articulation(token)
+        if vocal["consonant_clusters"]:
+            warnings.append("difficult_consonant_cluster_review")
+        if vocal["long_word_review"]:
+            warnings.append("long_word_or_suffix_stack_review")
+        token_reports.append({"word": token, "orthographic_syllables": count, "warnings": issues,
+                              "articulation": vocal})
     total = sum(t["orthographic_syllables"] for t in token_reports)
-    pronunciation_unknown = bool(set(warnings) - {"colloquial_surface_pronunciation"})
+    vowel_contacts = [{"left_word": a, "right_word": b, "status": "elision_or_separation_review"}
+                      for a, b in zip(tokens, tokens[1:]) if a[-1] in VOWELS and b[0] in VOWELS]
+    pronunciation_unknown = bool(set(warnings) & {"number_pronunciation_unknown", "foreign_pronunciation_unknown", "no_vowel_or_abbreviation"})
     if not tokens:
         warnings.append("no_lyric_words")
         pronunciation_unknown = True
@@ -61,6 +70,14 @@ def analyze_line(line: str, policy: ProsodyPolicy | None = None) -> dict:
         "meter_deviation": deviation,
         "warnings": sorted(set(warnings)),
         "stress_status": "not_evaluated_without_melody",
+        "stress_candidates": len([t for t in token_reports if t["orthographic_syllables"]]),
+        "vowel_contacts": vowel_contacts,
+        "readability": {"words": len(tokens), "clause_boundaries": len(re.findall(r"[,;:.!?]", line)),
+                        "words_per_clause": round(len(tokens) / (1 + len(re.findall(r"[,;:.!?]", line))), 2)},
+        "articulation_load": {"syllables_per_word": round(total / len(tokens), 3) if tokens else None,
+                              "long_word_count": sum(t["articulation"]["long_word_review"] for t in token_reports),
+                              "cluster_count": sum(len(t["articulation"]["consonant_clusters"]) for t in token_reports)},
+        "word_order_status": "requires_contextual_semantic_critic",
     }
 
 

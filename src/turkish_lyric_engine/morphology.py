@@ -8,17 +8,24 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import json
+import logging
 from pathlib import Path
 from importlib.metadata import PackageNotFoundError, version
 from typing import Protocol
 
-from .text import LETTERS, lower_tr, normalize_text, words
+from .text import LETTERS, lower_tr, normalize_text
 
 
 @dataclass(frozen=True)
 class Segment:
     surface: str
     function: str
+
+    def __post_init__(self):
+        if not isinstance(self.surface, str) or not self.surface or any(c not in LETTERS for c in self.surface):
+            raise ValueError("suffix surface must contain Turkish letters")
+        if not isinstance(self.function, str) or not self.function.strip():
+            raise ValueError("suffix grammatical function must be a non-empty string")
 
 
 @dataclass(frozen=True)
@@ -37,6 +44,8 @@ class MorphAnalysis:
             raise ValueError("word/base must use normalized Turkish lower case")
         if any(c not in LETTERS for c in self.word + self.base_surface):
             raise ValueError("only single Turkish surface words are supported")
+        if not isinstance(self.suffixes, (tuple, list)) or any(not isinstance(seg, Segment) for seg in self.suffixes):
+            raise ValueError("suffixes must contain validated Segment objects")
         for seg in self.suffixes:
             if not seg.surface or not seg.function.strip() or any(c not in LETTERS for c in seg.surface):
                 raise ValueError("suffix needs a Turkish surface and a grammatical function")
@@ -95,6 +104,9 @@ class ZeyrekMorphology:
         if installed != "0.1.3":
             raise ValueError(f"Zeyrek adapter requires 0.1.3; found {installed}")
         import zeyrek
+        logger = logging.getLogger("zeyrek.rulebasedanalyzer")
+        if not any(isinstance(f, _ZeyrekTraceFilter) for f in logger.filters):
+            logger.addFilter(_ZeyrekTraceFilter())
         self._analyzer = zeyrek.MorphAnalyzer()
         self._cache: dict[str, tuple[MorphAnalysis, ...]] = {}
 
@@ -135,3 +147,27 @@ class ZeyrekMorphology:
                 analyses.append(analysis)
         self._cache[token] = tuple(analyses)
         return self._cache[token]
+
+
+class AutoMorphology:
+    """Reviewed annotations first, optional Zeyrek, safe unknown fallback."""
+    def __init__(self, annotations: AnnotationMorphology | None = None, use_zeyrek: bool = True):
+        self.annotations = annotations or AnnotationMorphology()
+        self.backend = None
+        self.status = "annotation_or_unresolved_fallback"
+        if use_zeyrek:
+            try:
+                self.backend = ZeyrekMorphology()
+                self.status = "annotation_then_zeyrek"
+            except (ValueError, ImportError, OSError):
+                pass
+
+    def analyze(self, word: str) -> tuple[MorphAnalysis, ...]:
+        reviewed = self.annotations.analyze(word)
+        return reviewed if reviewed else self.backend.analyze(word) if self.backend else ()
+
+
+class _ZeyrekTraceFilter(logging.Filter):
+    def filter(self, record):
+        # 0.1.3 emits successful parse traces at WARNING. Keep genuine warnings.
+        return not record.getMessage().startswith("APPENDING RESULT:")

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from difflib import SequenceMatcher
+import re
 
 from .corpus import CorpusStore
 from .text import lexical_key, lyric_lines, words
@@ -34,11 +35,22 @@ def compare_texts(candidate: str, reference: str) -> dict:
             if ratio > best["ratio"]:
                 best = {"candidate_line": i, "reference_line": j, "ratio": round(ratio, 6),
                         "candidate_words": len(a.split()), "reference_words": len(b.split())}
+    block = SequenceMatcher(None, left, right, autojunk=False).find_longest_match()
+    consumed, block_line = 0, None
+    for i, line in enumerate(left_lines, 1):
+        if consumed <= block.a < consumed + len(line.split()):
+            block_line = i
+            break
+        consumed += len(line.split())
     return {
-        "exact_document_match": bool(left) and left_lines == right_lines,
+        "exact_document_match": bool(left) and left_lines == right_lines and
+            [re.findall(r"\d+(?:[.,]\d+)*", line) for _, line in lyric_lines(candidate)] ==
+            [re.findall(r"\d+(?:[.,]\d+)*", line) for _, line in lyric_lines(reference)],
         "trigram_jaccard": round(jaccard(ngrams(left), ngrams(right)), 6),
         "token_sequence_ratio": round(SequenceMatcher(None, left, right, autojunk=False).ratio(), 6),
         "best_line_match": best,
+        "best_block_match": {"words": block.size, "candidate_token_start": block.a,
+                             "reference_token_start": block.b, "candidate_line": block_line},
     }
 
 

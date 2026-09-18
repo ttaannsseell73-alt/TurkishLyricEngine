@@ -1,0 +1,19 @@
+# Credentials are environment variables, never config files.
+[generation]
+genre = "Türkçe pop ballad"
+mood = "dokunaklı, doğal, güçlü"
+rhyme_scheme = "free"
+max_chars = 5000
+concept_count = 20
+hook_count = 50
+writer_count = 3
+max_rounds = 6
+target_score = 80
+max_calls = 40
+
+[provider]
+kind = "openai"
+timeout = 60
+max_output_tokens = 8000
+# model is explicitly chosen through TLE_MODEL or a model field here.
+# Ollama: kind="ollama", base_url="http://127.0.0.1:11434", model=<installed model>.

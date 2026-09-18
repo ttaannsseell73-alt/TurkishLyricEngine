@@ -1,98 +1,143 @@
 # TurkishLyricEngine
 
-Türkçe şarkı sözü üretimi için temiz, denetlenebilir dil ve corpus altyapısı.
-**V0.1 / M1 çalışan kapsam:** arşiv alma, hece sayımı, hece vezni/durak,
-kanıtlı morfolojiyle kafiye–redif ayrımı ve yerel korpusla sözcüksel benzerlik.
-Bu sürüm henüz tema girince tam şarkı üretmez.
+Türkçe şarkı sözü için hece, vezin/durak, fonetik kafiye, redif ve morfoloji
+analizi; corpus zekâsı; fikir/hook/hikâye kilitleri; çoklu yazar ve hedefli
+quality loop. Python 3.11+. Çekirdek runtime yalnız standart kütüphanedir.
 
-## Çalıştırma
+Üretim gerçek, açıkça seçilen bir model bağlantısı gerektirir. OpenAI,
+OpenAI-compatible JSON-schema endpoint ve yerel Ollama adaptörleri vardır.
+Credential eksikliğinde sahte söz veya puan üreten bir fallback bulunmaz.
+`replay` yalnız teknik regression fixture'ıdır; sanatsal başarı kanıtı değildir.
 
-Python 3.11+; çekirdeğin harici runtime bağımlılığı yoktur.
+## Kurulum ve yerel analiz
 
 ```bash
 python -m pip install .
-tle analyze examples/lyric_11.txt
 tle meter examples/lyric_7.txt --syllables 7 --durak 4+3
 tle meter examples/lyric_11.txt --syllables 11 --durak 6+5
-tle rhyme "Bir dalda kalan güller" "Bir elde solan küller" --annotations examples/morphology.json
+tle rhyme güller küller --annotations examples/morphology.json
+tle redif güller küller --annotations examples/morphology.json
+tle rhymes yollarım --dictionary examples/rhyme_dictionary.json
+tle analyze examples/lyric_11.txt
 tle ingest examples/archive.jsonl --db corpus.sqlite3
 tle stats --db corpus.sqlite3
+tle search "unut" --db corpus.sqlite3
 tle similarity examples/lyric_11.txt --db corpus.sqlite3
 ```
 
-Windows'ta `tle` PATH'te yoksa aynı komutları `python -m turkish_lyric_engine` ile çalıştır.
-Kurulum olmadan kaynakta çalışmak için Bash'te `PYTHONPATH=src`, PowerShell'de
-`$env:PYTHONPATH = "src"` kullan.
-
-Gerçek Zeyrek backend'i isteğe bağlıdır:
+PATH'te `tle` yoksa `python -m turkish_lyric_engine` kullanılabilir. Kaynakta
+kurulumsuz Bash: `PYTHONPATH=src`; PowerShell: `$env:PYTHONPATH="src"`.
+Gerçek morfoloji backend'i isteğe bağlıdır:
 
 ```bash
 python -m pip install -r requirements-morphology.lock.txt
 tle rhyme yaralıyım hatalıyım --zeyrek
 ```
 
-`yaralıyım / hatalıyım` için backend kök yüzeylerini `yara / hata` olarak,
-ortak ek dizisini `lıyım` olarak ayırır. Kalan ortak harf `a`dır;
-`güller / küller` örneğinde ise incelenmiş isim çoğul analiziyle redif `ler`,
-kafiye adayı `ül` olur. Aynı son ek otomatik olarak gerçek kafiye sayılmaz.
-Birden fazla kök/ek yorumu varsa motor `unresolved` döner.
+Annotation önceliklidir. Zeyrek yoksa dependency eksikliği analizi çökertmez;
+bilinmeyen/çok anlamlı morfoloji `unresolved` kalır. İlk parse seçilmez veya
+eksiz olduğu varsayılmaz. `yollarım/kollarım`: incelenmiş analizde `lar+ım`
+redif, `ol` kafiye adayıdır. Ortak ek tek başına kafiye değildir.
 
-## Vezin ve durak
+## Gerçek üretim
 
-`meter` bir pozitif hece ölçüsü veya serbest biçim kabul eder. Yaygın profiller:
-7 → 4+3; 8 → 4+4; 11 → 6+5 veya 4+4+3; 14 → 7+7.
-Başka bir bölünme `--durak` ile açıkça istenebilir. Ölçü belirtilmezse serbesttir.
-Durak toplamı ölçüyle eşleşmeli ve kelime içinden geçmemelidir.
-Kelime sınırında teknik uyum, o durağın cümlede doğal veya melodide doğru
-olduğunu kanıtlamaz. Rapor bu ayrımı korur.
-
-**Aruz taraması henüz uygulanmadı.** Hece vezni ve aruz aynı analiz değildir.
-Metinden çıkan hece tahmini, melodik prozodi/vurgu değerlendirmesi yerine geçmez.
-Sayılar, yabancı harfler ve sesli içermeyen kısaltmalar belirsizlik taşır;
-hece tahmini belirsizken sabit ölçüye uyum PASS olarak sunulmaz.
-Türkçe alfabeyle yazılmış yabancı kelimelerin telaffuzu otomatik doğrulanmaz.
-
-## Arşiv
-
-V1 giriş biçimi UTF-8 JSONL'dir: satır başına tek eser/record.
-Şarkı/şiir/türkü/kafiye sözlüğü/GOLD/RED için `kind` alanları desteklenir.
-`examples/archive.jsonl` özgün **teknik fixture** içerir; GOLD veya başarılı söz
-örneği değildir. Gerçek özel arşiv henüz yüklenmemiştir.
-
-Kaynak ve hak bilgisi zorunlu olarak kayıtla ilişkilidir; kesin hukuki izin
-olarak yorumlanmaz. Aynı eser tek içerik olarak sayılır, her kaynağın özgün
-metni/provenance kaydı ayrı korunur. Nakarat tekrarları silinmez.
-Batch hatası veya ID çakışması tüm batch'i geri alır; örtük kayıt güncellemesi yoktur.
-
-Özel arşivi `data/private/` altında tut. SQLite/.env dosyaları Git'e dahil değildir.
-Ingestion metni internete veya modele göndermez. PDF/DOCX/OCR ve mevcut
-sözlük biçimlerinin dönüştürülmesi gerçek arşiv görüldükten sonra eklenecektir.
-V1 `rhyme_dictionary` içeriğini genel arşiv olarak saklar; kelime başına
-doğrulanmış morfolojik kafiye indeksi henüz yoktur.
-
-Benzerlik kontrolü yalnız yüklenen korpusta exact/3-gram/kelime sırası/satır
-eşleşmesi arar. Embedding veya kapsamlı telif kararı üretmez. Boş korpus
-`not_checked_empty_corpus` olarak raporlanır; "temiz" sonucu verilmez.
-
-## Doğrulama ve devam
+Güvenli ortamda `TLE_MODEL` ve sağlayıcının credential'ı yapılandırılır:
+OpenAI için `OPENAI_API_KEY`; compatible endpoint için gerekiyorsa `TLE_API_KEY`.
+Anahtar repo, CLI argümanı, rapor veya sohbet içine yazılmaz.
 
 ```bash
-python scripts/run_checks.py --suite core
-python -m pip install -r requirements-morphology.lock.txt
-python scripts/run_checks.py --suite morphology
-python scripts/run_checks.py --suite all
+tle preflight --config config/default.toml
+tle generate "Birini hâlâ seviyorsun ama artık beklemiyorsun." --config config/default.toml --out outputs/first
 ```
 
-Core ve gerçek morfoloji suite'leri ayrıdır. Zorunlu backend suite'inde eksik
-paket başarı/skip diye gizlenmez. CI Linux ve Windows core; Linux gerçek
-Zeyrek entegrasyonu çalıştırır. Yerel PASS, GitHub CI PASS yerine geçmez.
+Yerel, önceden çalışan Ollama için anahtar gerekmeyebilir:
 
-Kalite çekirdeği [LYRIC_CONSTITUTION.md](docs/LYRIC_CONSTITUTION.md), veri biçimi
-[CORPUS_CONTRACT.md](docs/CORPUS_CONTRACT.md), sınırlar ve devam mimarisi
-[ARCHITECTURE.md](docs/ARCHITECTURE.md) içindedir.
-Aktif görevler sohbetler arasında mevcut tek `PROJECT_STATE.md` dosyasından
-izlenir; burada ikinci bir ana görev dosyası tutulmaz.
+```bash
+tle generate "Sevmek sürüyor, beklemek bitiyor." --provider ollama --model <kurulu-model> --out outputs/local
+```
 
-Proje kodu sıfırdan yazılmıştır; eski SongEngine/LyricEngine_Lab taşınmamıştır.
-Üçüncü taraf paketleri kendi lisanslarıyla kullanılır; özel arşiv lisansı
-proje kodunun lisansından bağımsızdır. Proje için henüz açık kaynak lisansı seçilmedi.
+Modelin Türkçe/JSON-schema yeterliliği değerlendirme gerektirir; model adı
+veya download varsayımı yapılmaz. Endpoint için `--base-url`/`TLE_BASE_URL`
+vardır. HTTP yalnız loopback'te; uzak endpoint HTTPS olmalıdır. Eksik/refused
+JSON kabul edilmez. `preflight` config denetimidir; model çağrısı yapmaz.
+
+Varsayılan: 20 fikir → ayrı idea judge/top5 → fikir kilidi → 50 hook → hook
+judge/top5 → uygun hook kilidi → hikâye/bölüm planı → 3 yazar → teknik/anlamsal
+critics → en güçlü taslak → en fazla 6 hedefli rewrite → final söz/rapor.
+En fazla 40 model çağrısı vardır. Contract düzeltmesi en fazla bir ek çağrı
+alır; transport hatasında otomatik ücretli retry yapılmaz.
+
+```bash
+tle generate "Tema" --meter 11 --durak 6+5 --rhyme-scheme ABAB --db corpus.sqlite3 --dictionary data/private/words.json --feedback-db feedback.sqlite3 --out outputs/with_archive
+```
+
+Serbest ölçü varsayılandır. 7/8/11/özel pozitif ölçü ve durak seçilebilir.
+Kafiye için anlam bozma kabul edilmez. Hece eşitliği söyleyiş/duygu puanı değildir.
+Form: V4/P2/C4/V4/P2/C4/B2/C4. Chorus ilk satırı hook'tur; üç nakarat aynıdır.
+Söz etiketleri dahil en fazla5000 karakter doğrulanır. İkinci prechorus ayrı
+beat'tir. Rewrite yalnız bildirilen zayıf koordinatları değiştirir; chorus
+patch'i tekrarlarına eşlenir. Zayıf kilitli hook yeniden seçilecekse yeni
+hikâye ve yeni taslaklar başlatılır. Judge varsayılanı aynı sağlayıcıda ayrı
+çağrıdır; `[judge]` config ile farklı model seçilebilir.
+
+Çıktı klasörü mevcutsa overwrite edilmez. `lyrics.txt`, `final.json`, çağrı/usage
+özeti, adaylar/gerekçeler, kilitler, taslak denetimleri ve revision kayıtları
+saklanır. Hata tamamlanan artifact'ları silmez. Kalite eşiği altında
+`quality_target_not_met` döner. `review_ready` insan değerlendirmesine hazır
+taslaktır. Puanlar hit/viral/telif güvencesi değildir. Her aktif boyut eşik
+altında geçişi engeller; yüksek ortalama zayıf boyutu örtemez.
+
+## Corpus ve geri bildirim
+
+JSONL/JSON/CSV eser kayıtları; TXT veya TXT klasörü desteklenir. TXT metadata'sı
+`eser.txt.meta.json` yanındadır. Satır/kıta/bölüm, hece, kafiye/redif adayları,
+kelime/2–5 gram istatistiği ve ters indeks tutulur. M1 veritabanına additive
+indeks migration uygulanır; kaynak/orijinal metin korunur. Bozuk batch
+provenance ve indeksleriyle birlikte tamamen rollback yapar.
+
+Writer ham archive sözlerini almaz. Corpus ölçü/tür istatistiği, klişe frekansı
+ve denetim; sözlük anlamı olan kafiye aileleri sağlar. `search --include-text`
+yalnız yerel araştırma için açık bir tercihtir.
+
+```bash
+tle feedback --run outputs/first/final.json --decision accept --feedback-db feedback.sqlite3 --db corpus.sqlite3
+tle feedback --run outputs/first/final.json --decision edit --replacement corrected.txt --note "Dili sadeleştirdim" --feedback-db feedback.sqlite3
+tle audit outputs/first/final.json --db corpus.sqlite3
+```
+
+GOLD/RED yalnız gerçek kullanıcı kararından oluşur; replay bu şekilde
+etiketlenemez. Tür bazında mekanizma kabul/ret ve hook uzunluğu sayaçları
+sonraki üretimde kullanılır. Küçük örneklem mutlak kural veya model eğitimi
+sayılmaz. `.env`, SQLite, `data/private/` ve `outputs/` Git dışındadır.
+
+## API ve doğrulama
+
+```bash
+tle serve --out outputs/api --db corpus.sqlite3 --feedback-db feedback.sqlite3
+python scripts/run_checks.py --suite core
+python -m pip install -r requirements-morphology.lock.txt
+python scripts/run_checks.py --suite all
+python scripts/smoke_cli.py --output reports/local/cli.json
+```
+
+API varsayılanı `127.0.0.1:8765`: `/health`, `/analyze`, `/generate`, `/search`,
+`/feedback`. Dış arayüz bind için `TLE_SERVER_TOKEN` gerekir.
+[API](docs/API.md), [mimari](docs/ARCHITECTURE.md),
+[corpus/sözlük biçimi](docs/CORPUS_CONTRACT.md),
+[kalite prensipleri](docs/LYRIC_CONSTITUTION.md),
+[doğrulama ve sınırlar](docs/DELIVERY_STATE.md).
+
+CI Linux/Windows × Python3.11/3.12 çekirdek ve kurulu CLI; Linux gerçek Zeyrek
+regression suite. Test HTTP sunucusu yalnız transport testidir; canlı model
+kabulü değildir. `--seed` teknik replay'de aynı sonucu sağlar; canlı servis
+birebir aynı çıktı garantisi vermez.
+
+Özel archive ve canlı model erişimi bu çalışma ortamında bulunmadığından
+archive kapsamı/canlı üretim kalitesi doğrulanmadı. Aruz, melodi üzerinde
+vurgu/sustain ve embedding benzerliği metin V1 kapsamı dışındadır. Yazımdan
+fonetik/stress tahmini ile incelenmiş telaffuz farklı etiketlenir. Yalnız
+verilen corpus'ta lexical copy adayları aranır; hukuki telif hükmü verilmez.
+
+Çalışan M1 korundu; legacy SongEngine taşınmadı. Third-party dependency'ler
+kendi lisanslarıyla kullanılır. Repo için açık kaynak lisansı seçilmedi;
+archive hakları kod lisansından ayrıdır.

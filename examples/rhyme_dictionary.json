@@ -1,0 +1,100 @@
+[
+  {
+    "word": "yollarım",
+    "source": "own_technical_lexicon_fixture",
+    "rights": "owned",
+    "base_surface": "yol",
+    "lemma": "yol",
+    "suffixes": [
+      {
+        "surface": "lar",
+        "function": "plural"
+      },
+      {
+        "surface": "ım",
+        "function": "possessive_1sg"
+      }
+    ]
+  },
+  {
+    "word": "kollarım",
+    "source": "own_technical_lexicon_fixture",
+    "rights": "owned",
+    "base_surface": "kol",
+    "lemma": "kol",
+    "suffixes": [
+      {
+        "surface": "lar",
+        "function": "plural"
+      },
+      {
+        "surface": "ım",
+        "function": "possessive_1sg"
+      }
+    ]
+  },
+  {
+    "word": "gül",
+    "source": "own_technical_lexicon_fixture",
+    "rights": "owned",
+    "base_surface": "gül",
+    "lemma": "gül",
+    "suffixes": []
+  },
+  {
+    "word": "kül",
+    "source": "own_technical_lexicon_fixture",
+    "rights": "owned",
+    "base_surface": "kül",
+    "lemma": "kül",
+    "suffixes": []
+  },
+  {
+    "word": "bel",
+    "source": "own_technical_lexicon_fixture",
+    "rights": "owned",
+    "base_surface": "bel",
+    "lemma": "bel",
+    "suffixes": []
+  },
+  {
+    "word": "sel",
+    "source": "own_technical_lexicon_fixture",
+    "rights": "owned",
+    "base_surface": "sel",
+    "lemma": "sel",
+    "suffixes": []
+  },
+  {
+    "word": "gülüş",
+    "source": "own_technical_lexicon_fixture",
+    "rights": "owned",
+    "base_surface": "gülüş",
+    "lemma": "gülüş",
+    "suffixes": []
+  },
+  {
+    "word": "bölüş",
+    "source": "own_technical_lexicon_fixture",
+    "rights": "owned",
+    "base_surface": "bölüş",
+    "lemma": "bölüş",
+    "suffixes": []
+  },
+  {
+    "word": "yar",
+    "source": "own_technical_lexicon_fixture",
+    "rights": "owned",
+    "base_surface": "yar",
+    "lemma": "yar",
+    "suffixes": []
+  },
+  {
+    "word": "diyar",
+    "source": "own_technical_lexicon_fixture",
+    "rights": "owned",
+    "base_surface": "diyar",
+    "lemma": "diyar",
+    "suffixes": []
+  }
+]

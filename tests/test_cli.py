@@ -1,14 +1,26 @@
 from contextlib import redirect_stderr, redirect_stdout
 import io
 import json
+import os
 from pathlib import Path
 import tempfile
+import subprocess
+import sys
 import unittest
 
 from turkish_lyric_engine.cli import main
 
 
 class CliTests(unittest.TestCase):
+    def test_cli_subprocess_outputs_utf8_with_ascii_stdio(self):
+        root = Path(__file__).resolve().parents[1]
+        environment = {**os.environ, 'PYTHONIOENCODING':'ascii', 'PYTHONPATH':str(root/'src')}
+        process = subprocess.run([sys.executable,'-m','turkish_lyric_engine','rhyme','güller','küller',
+                                  '--annotations',str(root/'examples/morphology.json')], env=environment,
+                                 capture_output=True, check=False)
+        self.assertEqual(process.returncode,0,process.stderr.decode('utf-8'))
+        self.assertEqual(json.loads(process.stdout.decode('utf-8'))['base_tail'],'ül')
+
     def call(self, args):
         out, err = io.StringIO(), io.StringIO()
         with redirect_stdout(out), redirect_stderr(err):

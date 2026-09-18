@@ -1,4 +1,4 @@
-name: lyric-foundation
+name: lyric-engine
 
 on:
   push:
@@ -22,6 +22,10 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Core regression checks (no model/network dependency)
         run: python scripts/run_checks.py --suite core --report reports/local/core.json
+      - name: Install and run packaged CLI
+        run: python -m pip install .
+      - name: Packaged end-to-end smoke checks
+        run: python scripts/smoke_cli.py --output reports/local/cli.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -11,3 +11,6 @@ data/private/
 .env
 *.key
 reports/local/
+outputs/
+.env.*
+*.pem
